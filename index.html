@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>WebAR: управление объектом, HDRI и PBR</title>
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Three.js как ES-модули. Версию лучше не менять -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+
+<!-- Стартовый экран (до запуска AR) -->
+<div id="start">
+  <h2>WebAR: управление объектом</h2>
+  <p id="status">Запуск...</p>
+  <button id="startBtn" disabled>Запустить AR</button>
+</div>
+
+<!-- Интерфейс внутри AR-сессии (DOM overlay) -->
+<div id="overlay">
+  <div id="hint"></div>
+  <button id="togglePanel" type="button">✕ Скрыть</button>
+
+  <div id="panel">
+    <div class="group">
+      <h4>Модель</h4>
+      <div id="modelChips" class="chips"></div>
+    </div>
+
+    <div class="group">
+      <h4>Цвет</h4>
+      <div id="colorChips" class="chips"></div>
+    </div>
+
+    <div class="group">
+      <h4>Поворот</h4>
+      <div class="row">
+        <button id="rotL" class="chip" type="button">⟲ 15°</button>
+        <button id="rotR" class="chip" type="button">15° ⟳</button>
+        <button id="spin" class="chip" type="button">Автовращение</button>
+      </div>
+      <input id="yaw" type="range" min="0" max="360" step="1" value="0" />
+    </div>
+
+    <div class="group">
+      <h4>Материал (PBR) и размер</h4>
+      <label>Шероховатость <input id="rough" type="range" min="0" max="1" step="0.01" value="0.5" /></label>
+      <label>Металличность <input id="metal" type="range" min="0" max="1" step="0.01" value="0" /></label>
+      <label>Размер <input id="scale" type="range" min="0.3" max="3" step="0.05" value="1" /></label>
+      <button id="resetMat" class="chip" type="button">Сбросить материал</button>
+    </div>
+
+    <div class="group">
+      <h4>Освещение (HDRI)</h4>
+      <div id="envChips" class="chips"></div>
+    </div>
+
+    <div class="row">
+      <button id="clearBtn" class="chip" type="button">Убрать объект</button>
+      <button id="exitBtn" class="chip" type="button">Выйти из AR</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
